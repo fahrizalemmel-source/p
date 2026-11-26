@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AU Kamar 205 — Part 1: paket salah pintu</title>
+    <title>AU Kamar 205 — Part 2: penghuni lama</title>
 
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -355,8 +355,8 @@
     <div class="stage-outer">
         <div class="device-column">
 
-            <!-- ==================== SCREEN 1: SAMPUL AU (COVER PAGE) ==================== -->
-            <section id="cover-screen" class="cover-grain select-none" aria-label="Sampul AU Kamar 205">
+            <!-- ==================== SCREEN 1: SAMPUL AU PART 2 (COVER PAGE) ==================== -->
+            <section id="cover-screen" class="cover-grain select-none" aria-label="Sampul AU Kamar 205 Part 2">
                 <!-- Watermark Nomor Kamar di Latar -->
                 <div class="pointer-events-none absolute -right-4 top-8 text-[118px] font-black tracking-tighter text-white/[0.03] leading-none">
                     205
@@ -368,7 +368,7 @@
                     <div>
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/75 border border-red-500/35 text-red-300 text-[10.5px] font-extrabold tracking-widest uppercase">
                             <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                            <span>AU HOROR • SLOW-BURN • PART 01 / 50</span>
+                            <span>AU HOROR • SLOW-BURN • PART 02 / 50</span>
                         </div>
 
                         <h1 class="mt-4 text-[36px] font-black tracking-tight text-white leading-[1.04]">
@@ -376,17 +376,17 @@
                         </h1>
 
                         <p class="mt-1.5 text-[14.5px] font-semibold text-gray-300">
-                            Part 1 — <span class="text-red-300/95 italic">"paket salah pintu"</span>
+                            Part 2 — <span class="text-red-300/95 italic">"penghuni lama"</span>
                         </p>
 
                         <div class="mt-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10">
                             <p class="text-[12.5px] text-gray-300/90 leading-relaxed">
-                                "Pindahan ke kosan baru harusnya tenang-tenang aja. Sampai paket nyasar nganter Kina kenalan sama penghuni kamar sebelah—dan lampu sensor lorong lantai dua yang nyala sendiri tiap lewat tengah malam."
+                                "Pagi-pagi baru buka pintu kamar, Kina malah disambut tiga tumpuk kardus asing persis di depan pintu 205. Esa ngotot bukan punya dia—tapi di resi kardus berdebu itu tertulis nama penghuni yang sudah pindah sejak semester lalu."
                             </p>
                         </div>
                     </div>
 
-                    <!-- Cast Preview (Statis & Ringan) -->
+                    <!-- Cast Preview -->
                     <div>
                         <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2.5">
                             Karakter Utama
@@ -425,7 +425,7 @@
                 <!-- Footer CTA Sampul: Masuk ke Room Chat -->
                 <div class="p-4 pt-3 border-t border-white/10 bg-black/50 shrink-0">
                     <button onclick="enterRoomChat()" style="touch-action: manipulation;" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-red-700 via-red-600 to-rose-600 hover:from-red-600 hover:to-rose-500 active:scale-[0.98] text-white text-[14.5px] font-extrabold tracking-wide shadow-lg shadow-red-950/60 flex items-center justify-center gap-2 transition">
-                        <span>Masuk ke Room Chat</span>
+                        <span>Lanjut ke Room Chat</span>
                         <span class="text-base">→</span>
                     </button>
                 </div>
@@ -434,11 +434,11 @@
             <!-- ==================== SCREEN 2: WHATSAPP ROOM CHAT (RC) ==================== -->
             <div id="rc-screen" class="rc-standby">
 
-                <!-- TOP CONTROL BAR (RINGAN TANPA TOMBOL FOTO) -->
+                <!-- TOP CONTROL BAR -->
                 <div class="top-control-bar select-none">
                     <!-- Kiri: Tombol Sampul + Badge Part -->
                     <div class="flex items-center gap-1.5 min-w-0">
-                        <button onclick="openCoverScreen()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 text-[11px] font-semibold flex items-center gap-1 transition shrink-0" title="Kembali ke Sampul AU">
+                        <button onclick="openCoverScreen()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 text-[11px] font-semibold flex items-center gap-1 transition shrink-0" title="Kembali ke Sampul Part 2">
                             <svg class="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                             </svg>
@@ -446,7 +446,7 @@
                         </button>
 
                         <span class="px-2.5 py-1 rounded-full bg-red-500/15 border border-red-500/35 text-red-400 text-[10.5px] font-extrabold tracking-wide shrink-0">
-                            PART 1 / 50
+                            PART 2 / 50
                         </span>
                     </div>
 
@@ -466,7 +466,7 @@
                             </svg>
                         </button>
 
-                        <button onclick="resetStory()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 text-[11px] font-semibold transition" title="Ulangi Part 1">
+                        <button onclick="resetStory()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 text-[11px] font-semibold transition" title="Ulangi Part 2">
                             Reset
                         </button>
                     </div>
@@ -480,7 +480,7 @@
                         Notifikasi
                     </div>
 
-                    <!-- 1. WHATSAPP iOS HEADER -->
+                    <!-- 1. WHATSAPP iOS HEADER (SUDAH DI-SAVE DARI PART 1: esa kamar 205) -->
                     <header class="wa-header px-2.5 py-2 flex items-center justify-between select-none">
                         <div class="flex items-center gap-1.5 min-w-0">
                             <button onclick="openCoverScreen()" class="p-1 text-ios-blue flex items-center hover:opacity-75 transition shrink-0" title="Kembali ke Sampul">
@@ -497,10 +497,10 @@
 
                             <div class="flex flex-col min-w-0 ml-1 leading-tight">
                                 <span id="wa-contact-name" class="text-[15px] font-bold text-gray-900 truncate">
-                                    +62 813-7741-9028
+                                    esa kamar 205
                                 </span>
                                 <span id="wa-contact-sub" class="text-[11.5px] text-ios-waMuted truncate">
-                                    ~esa • online
+                                    terakhir dilihat hari ini pukul 01.47
                                 </span>
                             </div>
                         </div>
@@ -611,7 +611,7 @@
                             <div id="tw-media-box" class="hidden mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-gray-100">
                                 <img id="tw-media-img"
                                      src=""
-                                     onerror="handleImgError(this, 'kinaNight')"
+                                     onerror="handleImgError(this, 'kinaSpiky')"
                                      alt="Foto Tweet Kina"
                                      onclick="openLightbox(this.src, 'Foto Tweet Kina (@kinabukanaku)')"
                                      class="w-full max-h-64 object-cover cursor-zoom-in">
@@ -632,7 +632,7 @@
 
                             <!-- Timestamp Tweet -->
                             <div class="mt-3.5 pb-3 border-b border-gray-200 text-[13px] text-gray-500 flex items-center gap-1">
-                                <span id="tw-timestamp">19.43 · 26/11/26</span>
+                                <span id="tw-timestamp">08.12 · 27/11/26</span>
                                 <span>·</span>
                                 <span class="text-ios-twBlue">Twitter for iPhone</span>
                             </div>
@@ -684,7 +684,7 @@
                         <!-- Footer Tombol Kembali ke Chat WA -->
                         <div class="p-3.5 border-t border-gray-200 bg-gray-50 shrink-0">
                             <button id="tw-close-btn" onclick="closeTweetOverlay()" style="touch-action: manipulation;" class="w-full py-3.5 px-4 rounded-full bg-gray-900 hover:bg-black active:scale-[0.98] text-white text-[14px] font-semibold shadow-md transition flex items-center justify-center gap-2">
-                                <span id="tw-close-label">Kembali ke Chat WhatsApp</span>
+                                <span id="tw-close-label">Buka Chat WhatsApp</span>
                                 <span>→</span>
                             </button>
                         </div>
@@ -714,16 +714,17 @@
         </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT ENGINE & NASKAH PART 1: "paket salah pintu" ==================== -->
+    <!-- ==================== JAVASCRIPT ENGINE & NASKAH PART 2: "penghuni lama" ==================== -->
     <script>
         // =========================================================================
-        // 2. KONFIGURASI FOTO ONLINE (LANGSUNG DARI PINIMG, RINGAN & SIAP HOSTING)
+        // 1. KONFIGURASI FOTO PART 2 (ONLINE PINIMG + GENERATOR FOTO KARDUS LORONG 205)
         // =========================================================================
         const FALLBACK_MEDIA = {
             esaPP: "https://placehold.co/300x300/18181B/FCA5A5?text=ESA+205",
             kinaPP: "https://placehold.co/300x300/18181B/93C5FD?text=KINA+204",
-            esaPap: "https://placehold.co/600x650/1C1917/FCD34D?text=PAP+KAMAR+205",
-            kinaNight: "https://placehold.co/600x600/0F172A/93C5FD?text=MALAM+205"
+            esaGlasses: "https://placehold.co/600x650/1C1917/FCD34D?text=ESA+PAGI",
+            kinaSpiky: "https://placehold.co/600x600/1E293B/F9A8D4?text=BANGUN+TIDUR",
+            kinaPink: "https://placehold.co/600x700/1E293B/F9A8D4?text=OTW+NGAMPUS"
         };
 
         const MEDIA_CONFIG = {
@@ -733,12 +734,247 @@
             // 2. Foto PP Kina (Yuqi lagi minum)
             kinaPP: "https://i.pinimg.com/736x/2e/63/ff/2e63ffe87b6620759003de7519511d49.jpg",
 
-            // 3. Foto PAP Esa di Kamar 205
-            esaPap: "https://i.pinimg.com/736x/07/6d/3b/076d3b37871887cba35f3612dab1f850.jpg",
+            // 3. Foto Yuqi rambut berdiri satu (bangun tidur)
+            kinaSpiky: "https://i.pinimg.com/736x/a9/e8/23/a9e82327bba4425f281968b8e19e6ef9.jpg",
 
-            // 4. Foto Suasana Malam Kina (Scene 5)
-            kinaNight: "https://i.pinimg.com/736x/43/64/83/436483670b153f098ffb2c7c7429e9de.jpg"
+            // 4. Foto Lucas kacamata bulat (PAP pagi hari)
+            esaGlasses: "https://i.pinimg.com/736x/74/04/4e/74044e6b4246a52122ea202cba4ce1fa.jpg",
+
+            // 5. Foto Yuqi mirror selfie jersey pink (OTW ngampus)
+            kinaPink: "https://i.pinimg.com/736x/f8/56/25/f8562592b38ce7607b0f77f2b7d87895.jpg",
+
+            // 6. Foto Tumpukan 3 Kardus Depan Pintu 205 (otomatis di-render dari scene referensi, atau isi link URL sendiri di sini)
+            kardus205: ""
         };
+
+        // Generator visual realistis tumpukan 3 kardus depan pintu kayu & sandal jepit biru (referensi foto lorong 205)
+        function generateHallwayBoxesPhoto() {
+            const canvas = document.createElement("canvas");
+            canvas.width = 540;
+            canvas.height = 680;
+            const ctx = canvas.getContext("2d");
+
+            // 1. Dinding lorong kosan & pencahayaan lampu kuning redup di kiri atas
+            const wallGrad = ctx.createRadialGradient(95, 45, 10, 140, 140, 420);
+            wallGrad.addColorStop(0, "#FFF3C4");
+            wallGrad.addColorStop(0.22, "#D6C5A9");
+            wallGrad.addColorStop(0.65, "#9A8F82");
+            wallGrad.addColorStop(1, "#5C554E");
+            ctx.fillStyle = wallGrad;
+            ctx.fillRect(0, 0, 540, 470);
+
+            // Lorong gelap di ujung kiri belakang
+            ctx.fillStyle = "#1E1B18";
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(75, 0);
+            ctx.lineTo(75, 455);
+            ctx.lineTo(0, 480);
+            ctx.closePath();
+            ctx.fill();
+
+            // Pintu kamar ujung belakang
+            ctx.fillStyle = "#2B211A";
+            ctx.fillRect(22, 48, 38, 395);
+
+            // Bola lampu lorong menyala hangat di langit-langit kiri
+            const bulbGlow = ctx.createRadialGradient(85, 22, 2, 85, 22, 70);
+            bulbGlow.addColorStop(0, "rgba(255, 251, 220, 1)");
+            bulbGlow.addColorStop(0.35, "rgba(253, 224, 130, 0.55)");
+            bulbGlow.addColorStop(1, "rgba(253, 224, 130, 0)");
+            ctx.fillStyle = bulbGlow;
+            ctx.beginPath();
+            ctx.arc(85, 22, 70, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#FFFBEB";
+            ctx.beginPath();
+            ctx.arc(85, 20, 7, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 2. Kusen & Daun Pintu Kayu Kamar 205 (Kanan)
+            ctx.fillStyle = "#3A2214";
+            ctx.fillRect(205, 0, 295, 468);
+
+            // Daun pintu kayu coklat tua dengan tekstur serat vertikal
+            const doorGrad = ctx.createLinearGradient(220, 0, 480, 460);
+            doorGrad.addColorStop(0, "#5C3720");
+            doorGrad.addColorStop(0.5, "#4B2B17");
+            doorGrad.addColorStop(1, "#381F10");
+            ctx.fillStyle = doorGrad;
+            ctx.fillRect(222, 0, 260, 462);
+
+            ctx.strokeStyle = "rgba(25, 12, 5, 0.35)";
+            ctx.lineWidth = 2;
+            for (let x = 235; x < 475; x += 14) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, 462);
+                ctx.stroke();
+            }
+
+            // Ventilasi jalusi bawah pintu
+            ctx.fillStyle = "#24130A";
+            ctx.fillRect(256, 338, 128, 52);
+            ctx.fillStyle = "#4A2A17";
+            for (let y = 344; y < 386; y += 8) {
+                ctx.fillRect(262, y, 116, 4);
+            }
+
+            // Gagang pintu & plat kunci stainless di kanan pintu
+            ctx.fillStyle = "#8C8A84";
+            ctx.fillRect(438, 175, 16, 86);
+            ctx.fillStyle = "#B8B5AD";
+            ctx.beginPath();
+            ctx.roundRect(404, 194, 44, 10, 4);
+            ctx.fill();
+
+            // 3. Lantai Keramik Putih dengan Garis Nat Perspektif
+            const floorGrad = ctx.createLinearGradient(0, 445, 0, 680);
+            floorGrad.addColorStop(0, "#CFCBC4");
+            floorGrad.addColorStop(0.45, "#E2DFD9");
+            floorGrad.addColorStop(1, "#CBC6BE");
+            ctx.fillStyle = floorGrad;
+            ctx.fillRect(0, 445, 540, 235);
+
+            ctx.strokeStyle = "rgba(85, 80, 75, 0.35)";
+            ctx.lineWidth = 1.6;
+            // Garis horizontal lantai
+            [465, 495, 535, 585, 645].forEach((y) => {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(540, y);
+                ctx.stroke();
+            });
+            // Garis perspektif vertikal lantai
+            [
+                [70, 445, -40, 680],
+                [165, 445, 110, 680],
+                [265, 445, 275, 680],
+                [365, 445, 445, 680],
+                [465, 445, 580, 680]
+            ].forEach(([x1, y1, x2, y2]) => {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            });
+
+            // 4. Keset Karet Hitam di Pojok Kanan Bawah
+            ctx.fillStyle = "#1F2022";
+            ctx.beginPath();
+            ctx.moveTo(435, 472);
+            ctx.lineTo(540, 484);
+            ctx.lineTo(540, 565);
+            ctx.lineTo(410, 542);
+            ctx.closePath();
+            ctx.fill();
+
+            // 5. Sepasang Sandal Jepit Biru di Depan Pintu
+            function drawFlipFlop(cx, cy, angle) {
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(angle);
+                // Bayangan sandal
+                ctx.fillStyle = "rgba(0,0,0,0.32)";
+                ctx.beginPath();
+                ctx.ellipse(3, 5, 34, 13, 0, 0, Math.PI * 2);
+                ctx.fill();
+                // Sol sandal biru tua
+                ctx.fillStyle = "#1E3A8A";
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 33, 12.5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                // Tali jepit
+                ctx.strokeStyle = "#172554";
+                ctx.lineWidth = 3.2;
+                ctx.beginPath();
+                ctx.moveTo(-14, 0);
+                ctx.quadraticCurveTo(2, -9, 16, -6);
+                ctx.moveTo(-14, 0);
+                ctx.quadraticCurveTo(2, 9, 16, 6);
+                ctx.stroke();
+                ctx.restore();
+            }
+            drawFlipFlop(366, 466, 0.14);
+            drawFlipFlop(404, 480, 0.08);
+
+            // 6. Fungsi Menggambar Kardus 3D Perspektif + Lakban Coklat + Label Resi
+            function drawBox3D(x, y, w, h, d, skewY, hasLabel) {
+                // Bayangan bawah kardus
+                ctx.fillStyle = "rgba(20, 15, 10, 0.28)";
+                ctx.beginPath();
+                ctx.ellipse(x + w * 0.55, y + h + 8, w * 0.62, 14, 0.06, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Sisi depan-kiri kardus (terkena cahaya lampu lorong)
+                ctx.fillStyle = "#C69563";
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + w, y + skewY);
+                ctx.lineTo(x + w, y + h + skewY);
+                ctx.lineTo(x, y + h);
+                ctx.closePath();
+                ctx.fill();
+
+                // Sisi samping-kanan kardus (lebih gelap bayangan)
+                ctx.fillStyle = "#9C6E41";
+                ctx.beginPath();
+                ctx.moveTo(x + w, y + skewY);
+                ctx.lineTo(x + w + d, y + skewY - d * 0.36);
+                ctx.lineTo(x + w + d, y + h + skewY - d * 0.36);
+                ctx.lineTo(x + w, y + h + skewY);
+                ctx.closePath();
+                ctx.fill();
+
+                // Tutup atas kardus
+                ctx.fillStyle = "#D8AA78";
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + d, y - d * 0.36);
+                ctx.lineTo(x + w + d, y + skewY - d * 0.36);
+                ctx.lineTo(x + w, y + skewY);
+                ctx.closePath();
+                ctx.fill();
+
+                // Garis lipatan & lakban coklat di atas
+                ctx.strokeStyle = "rgba(92, 58, 28, 0.45)";
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(0, 0, 0, 0);
+                ctx.beginPath();
+                ctx.moveTo(x + d * 0.48, y - d * 0.17);
+                ctx.lineTo(x + w + d * 0.48, y + skewY - d * 0.17);
+                ctx.strokeStyle = "rgba(145, 98, 52, 0.55)";
+                ctx.lineWidth = 10;
+                ctx.stroke();
+
+                // Label resi putih kecil di sisi kardus
+                if (hasLabel) {
+                    ctx.fillStyle = "#F5F5F4";
+                    ctx.beginPath();
+                    ctx.moveTo(x + w + d * 0.25, y + h * 0.28);
+                    ctx.lineTo(x + w + d * 0.72, y + h * 0.28 - d * 0.17);
+                    ctx.lineTo(x + w + d * 0.72, y + h * 0.58 - d * 0.17);
+                    ctx.lineTo(x + w + d * 0.25, y + h * 0.58);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+
+            // Tumpukan 3 Kardus (Bawah, Tengah, Atas)
+            drawBox3D(112, 462, 138, 92, 108, 28, false);
+            drawBox3D(104, 372, 136, 86, 106, 26, true);
+            drawBox3D(88, 290, 136, 78, 102, 24, true);
+
+            // Vignette lembut pinggir foto kamera HP
+            const vig = ctx.createRadialGradient(270, 340, 180, 270, 340, 430);
+            vig.addColorStop(0, "rgba(0,0,0,0)");
+            vig.addColorStop(1, "rgba(0,0,0,0.28)");
+            ctx.fillStyle = vig;
+            ctx.fillRect(0, 0, 540, 680);
+
+            return canvas.toDataURL("image/jpeg", 0.88);
+        }
 
         // Fallback bertingkat otomatis (/736x/ -> /564x/ -> /originals/ -> placeholder)
         function handleImgError(img, slotKey) {
@@ -754,6 +990,10 @@
         }
 
         function applyAvatarsToDOM() {
+            if (!MEDIA_CONFIG.kardus205) {
+                MEDIA_CONFIG.kardus205 = generateHallwayBoxesPhoto();
+            }
+
             document.getElementById("wa-header-avatar").src = MEDIA_CONFIG.esaPP;
             document.getElementById("cover-prev-esaPP").src = MEDIA_CONFIG.esaPP;
             document.getElementById("cover-prev-kinaPP").src = MEDIA_CONFIG.kinaPP;
@@ -764,251 +1004,231 @@
         }
 
         // =========================================================================
-        // 3. NASKAH LENGKAP PART 1 / 50: "paket salah pintu"
+        // 2. NASKAH LENGKAP PART 2 / 50: "penghuni lama"
         // =========================================================================
-        const PART1_SCRIPT = [
-            // Pembuka Otomatis
-            { type: "system", text: "Hari ini" },
-            {
-                type: "system",
-                text: "🔒 Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them."
-            },
-            {
-                type: "chat",
-                sender: "dia",
-                text: "p",
-                time: "19.41",
-                typingMs: 500
-            },
-
-            // ==================== SCENE 1 (WHATSAPP - 19.41) ====================
-            {
-                type: "chat",
-                sender: "dia",
-                text: "kamar 204 ya?",
-                time: "19.41",
-                typingMs: 750
-            },
-            {
-                type: "chat",
-                sender: "aku",
-                text: "siapa",
-                time: "19.42"
-            },
-            {
-                type: "chat",
-                sender: "aku",
-                text: "salah sambung kali",
-                time: "19.42"
-            },
-            {
-                type: "reply",
-                sender: "dia",
-                quoteSender: "unknown",
-                quoteText: "kamar 204 ya?",
-                text: "kagak salah",
-                time: "19.42",
-                typingMs: 750
-            },
-            {
-                type: "chat",
-                sender: "dia",
-                text: "paket shopee lo nyasar depan pintu gw",
-                time: "19.42",
-                typingMs: 900
-            },
-            {
-                type: "chat",
-                sender: "dia",
-                text: "nama penerimanya kina kinanti bener kan?",
-                time: "19.43",
-                typingMs: 950
-            },
-
-            // ==================== SCENE 2 (TWEET OVERLAY 1 - 19.43) ====================
+        const PART2_SCRIPT = [
+            // ==================== SCENE 1 (TWEET OVERLAY 1 - PAGI 08.12) ====================
             {
                 type: "tweet",
-                mainText: "BARU JUGA PULANG NGAMPUS UDAH DISAMBUT NOMOR ASING SOK ASIK",
-                timestamp: "19.43 · 26/11/26",
-                quoteTweet: {
-                    age: "2m",
-                    text: "mana pp nya sok ganteng bgt pake jaket merah kek kang parkir indomaret"
-                },
+                mainText: "bangun-bangun rambut berdiri kek antena wifi gara-gara semalem ketiduran abis makan nasgor",
+                mediaSlot: "kinaSpiky",
+                timestamp: "08.12 · 27/11/26",
                 reply: {
                     age: "1m",
-                    text: "sok tau nama lengkap gue lagi, dapet nomor gue dr grup kosan kali ya"
-                }
+                    text: "mana baru inget kemaren belom sempet buang kardus paket di depan pintu, moga ga diangkut tukang sampah kosan"
+                },
+                closeButtonText: "Buka Pintu & Cek Lorong"
             },
 
-            // ==================== SCENE 3 (WHATSAPP - 19.44 - 19.47) ====================
-            {
-                type: "chat",
-                sender: "aku",
-                text: "lah kok bisa nyampe tempat lo",
-                time: "19.44"
-            },
-            {
-                type: "chat",
-                sender: "aku",
-                text: "lo kamar brp",
-                time: "19.44"
-            },
-            {
-                type: "chat",
-                sender: "dia",
-                text: "205. sebelah persis",
-                time: "19.44",
-                typingMs: 800
-            },
-            {
-                type: "chat",
-                sender: "dia",
-                text: "gw baru pindahan kemaren malem",
-                time: "19.45",
-                typingMs: 850
-            },
-            {
-                type: "chat",
-                sender: "aku",
-                text: "terus paket gw skrg dmn",
-                time: "19.45"
-            },
+            // ==================== SCENE 2 (WHATSAPP - 08.16 - 08.23) ====================
+            { type: "system", text: "Hari ini" },
             {
                 type: "image",
-                sender: "dia",
-                slot: "esaPap",
-                caption: "aman di dalem kamar gw. sini ambil klo ga takut gw culik",
-                time: "19.46",
-                typingMs: 1100
+                sender: "aku",
+                slot: "kardus205",
+                caption: "woi tetangga",
+                time: "08.16"
             },
             {
                 type: "chat",
                 sender: "aku",
-                text: "dih najis",
-                time: "19.46"
+                text: "lo pindahan apa buka gudang jne",
+                time: "08.16"
             },
             {
                 type: "chat",
                 sender: "aku",
-                text: "taro depan pintu aja ntar gw ambil",
-                time: "19.46"
+                text: "kardus numpuk depan pintu gitu ngalangin jalan tau ga",
+                time: "08.17"
             },
             {
                 type: "chat",
                 sender: "dia",
-                text: "galak amat neng",
-                time: "19.47",
-                typingMs: 700
-            },
-            {
-                type: "chat",
-                sender: "dia",
-                text: "save dulu nomor gw esa",
-                time: "19.47",
-                typingMs: 800
-            },
-
-            // ==================== SCENE 4 (SAVE KONTAK + DETAIL LORONG 205 + TWEET 2) ====================
-            {
-                type: "save_contact",
-                newName: "esa kamar 205",
-                newSub: "online",
-                toastText: "Kontak disimpan sebagai esa kamar 205"
-            },
-            {
-                type: "chat",
-                sender: "aku",
-                text: "yaudah makasih",
-                time: "19.48"
-            },
-            {
-                type: "chat",
-                sender: "aku",
-                text: "udah lo taro depan pintu blm?",
-                time: "19.48"
-            },
-            {
-                type: "chat",
-                sender: "dia",
-                text: "udah tuh",
-                time: "19.49",
+                text: "ha?",
+                time: "08.19",
                 typingMs: 650
             },
             {
                 type: "chat",
                 sender: "dia",
-                text: "btw td pas gw buka pintu lorong, lampu sensor depan kamar lo kedip-kedip mulu",
-                time: "19.49",
-                typingMs: 1150
+                text: "kardus apaan",
+                time: "08.19",
+                typingMs: 700
+            },
+            {
+                type: "reply",
+                sender: "dia",
+                quoteSender: "aku",
+                quoteText: "kardus numpuk depan pintu gitu ngalangin jalan tau ga",
+                text: "orang barang pindahan gw cuma satu koper sama tas ransel doang kemaren",
+                time: "08.20",
+                typingMs: 1050
             },
             {
                 type: "chat",
                 sender: "aku",
-                text: "emg udah lama rusak itu, paling besok dibenerin mas penjaga",
-                time: "19.50"
+                text: "dih ngeles",
+                time: "08.20"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "jelas-jelas numpuk tiga biji persis depan pintu 205 tuh liat fotonya",
+                time: "08.20"
             },
             {
                 type: "chat",
                 sender: "dia",
-                text: "oh kirain",
-                time: "19.50",
-                typingMs: 600
+                text: "bentar gw baru bangun",
+                time: "08.21",
+                typingMs: 750
+            },
+            {
+                type: "image",
+                sender: "dia",
+                slot: "esaGlasses",
+                caption: "muka bantal gini masa dituduh bongkar gudang subuh-subuh",
+                time: "08.21",
+                typingMs: 1050
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "ga nanya muka lo",
+                time: "08.22"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "tapi seriusan bukan punya lo?",
+                time: "08.22"
             },
             {
                 type: "chat",
                 sender: "dia",
-                text: "yaudah buruan ambil keburu ilang",
-                time: "19.51",
+                text: "bukan sumpah. kemaren malem pas gw masuk kamar jg kosong melompong depan pintu",
+                time: "08.23",
+                typingMs: 1100
+            },
+
+            // ==================== SCENE 3 (TWEET OVERLAY 2 - 08.25) ====================
+            {
+                type: "tweet",
+                mainText: "lah kocak kalo bukan punya si esa terus kardus tiga biji depan 205 punya siapa??",
+                timestamp: "08.25 · 27/11/26",
+                quoteTweet: {
+                    age: "2m",
+                    text: "mana kardusnya udah agak berdebu kek abis disimpen lama di gudang, tp baru nongol di lorong pagi ini"
+                },
+                reply: {
+                    age: "now",
+                    text: "pas gue deketin buat baca label resinya... nama penerimanya bukan esa anjir. tulisannya: RAKA - KAMAR 205"
+                },
+                closeButtonText: "Kembali ke Chat Esa"
+            },
+
+            // ==================== SCENE 4 (WHATSAPP - 08.27 - 08.33) ====================
+            {
+                type: "chat",
+                sender: "aku",
+                text: "sa",
+                time: "08.27"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "di resi kardusnya tulisannya nama raka kamar 205",
+                time: "08.27"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "temen lo?",
+                time: "08.28"
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "raka siapa anjir gw anak rantau baru nyampe kota ini kemaren sore",
+                time: "08.29",
+                typingMs: 950
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "paling penghuni 205 sebelum gw kali lupa ngambil",
+                time: "08.29",
                 typingMs: 850
             },
             {
+                type: "chat",
+                sender: "aku",
+                text: "masalahnya pas gw baru masuk kosan ini bulan lalu...",
+                time: "08.30"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "kata ibu kos kamar 205 tuh udah kosong dari semester kemaren",
+                time: "08.30"
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "terus kok kardusnya baru muncul pagi ini?",
+                time: "08.31",
+                typingMs: 800
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "udah ah lo jangan nakut-nakutin pagi-pagi, gw mau mandi ngampus",
+                time: "08.32",
+                typingMs: 950
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "ye siapa yg nakut-nakutin orang gw jg mau berangkat",
+                time: "08.32"
+            },
+            {
                 type: "status_update",
-                newSub: "terakhir dilihat hari ini pukul 20.14"
-            },
-            {
-                type: "tweet",
-                mainText: "paketnya beneran ditaro depan pintu dong mana ditindihin sendal jepit biar ga terbang 😭",
-                timestamp: "20.02 · 26/11/26",
-                reply: {
-                    age: "1m",
-                    text: "yaudah lah lumayan tetangga baru walau tengilnya minta ditampol"
-                }
+                newSub: "terakhir dilihat hari ini pukul 08.33"
             },
 
-            // ==================== SCENE 5 (CLOSING TWEET OVERLAY 3) ====================
+            // ==================== SCENE 5 (CLOSING TWEET OVERLAY 3 - 08.41) ====================
             {
                 type: "tweet",
-                mainText: "akhirnya keluar kosan nyari nasi goreng sekalian kabur dr tetangga baru sok kenal",
-                mediaSlot: "kinaNight",
-                timestamp: "20.18 · 26/11/26",
+                mainText: "berangkat ngampus dulu drpd mikirin kardus ga bertuan",
+                mediaSlot: "kinaPink",
+                timestamp: "08.41 · 27/11/26",
                 reply: {
                     age: "1m",
-                    text: "tp jujur td pas lewat depan 205 hawa lorongnya dingin bgt anjir padahal ac lorong mati"
+                    text: "tp aneh bgt sih... masa sendal jepit biru yg tadinya di depan pintu 205 ikut geser ke samping tumpukan kardus kek baru dipake orang"
                 },
-                closeButtonText: "Selesaikan Part 1"
+                closeButtonText: "Selesaikan Part 2"
             },
 
-            // ==================== END OF PART 1 CARD ====================
+            // ==================== END OF PART 2 CARD ====================
             {
-                type: "end_part1"
+                type: "end_part2"
             }
         ];
 
         // =========================================================================
-        // 4. ENGINE & INTERAKSI PENGGUNA
+        // 3. ENGINE & INTERAKSI PENGGUNA
         // =========================================================================
         let stepIndex = 0;
         let isBusy = false;
         let isAutoPlay = false;
         let soundEnabled = true;
-        let contactSaved = false;
         let autoTimer = null;
         let tweetLiked = false;
 
         const chatBody = document.getElementById("chat-body");
         const scrollBottomBtn = document.getElementById("scroll-bottom-btn");
         const unreadScrollDot = document.getElementById("unread-scroll-dot");
-        const waContactName = document.getElementById("wa-contact-name");
         const waContactSub = document.getElementById("wa-contact-sub");
         const typingIndicator = document.getElementById("typing-indicator");
         const tapHintText = document.getElementById("tap-hint-text");
@@ -1060,12 +1280,11 @@
             rc.classList.remove("rc-standby");
             rc.classList.add("rc-active");
 
+            // Di Part 2, langkah pertama langsung buka Tweet pagi Kina
             if (stepIndex === 0) {
                 setTimeout(() => {
                     renderStepImmediate();
-                    renderStepImmediate();
-                    renderStepImmediate();
-                }, 180);
+                }, 220);
             }
         }
 
@@ -1128,9 +1347,9 @@
         function nextStep() {
             if (isBusy) return;
             if (tweetOverlay.classList.contains("overlay-open")) return;
-            if (stepIndex >= PART1_SCRIPT.length) return;
+            if (stepIndex >= PART2_SCRIPT.length) return;
 
-            const step = PART1_SCRIPT[stepIndex];
+            const step = PART2_SCRIPT[stepIndex];
 
             if (step.sender === "dia" && step.typingMs) {
                 isBusy = true;
@@ -1139,13 +1358,13 @@
                 waContactSub.textContent = "mengetik...";
                 waContactSub.classList.add("text-emerald-600", "font-medium");
                 typingIndicator.classList.remove("hidden");
-                tapHintText.textContent = contactSaved ? "esa kamar 205 mengetik..." : "mengetik...";
+                tapHintText.textContent = "esa kamar 205 mengetik...";
                 scrollToLatest(true);
 
                 setTimeout(() => {
                     isBusy = false;
                     typingIndicator.classList.add("hidden");
-                    waContactSub.textContent = contactSaved ? "online" : "~esa • online";
+                    waContactSub.textContent = "online";
                     waContactSub.classList.remove("text-emerald-600", "font-medium");
                     tapHintText.textContent = isAutoPlay ? "Mode Auto aktif..." : "Ketuk layar atau bar ini untuk lanjut...";
 
@@ -1159,34 +1378,27 @@
         }
 
         function renderStepImmediate() {
-            if (stepIndex >= PART1_SCRIPT.length) return;
+            if (stepIndex >= PART2_SCRIPT.length) return;
 
-            const step = PART1_SCRIPT[stepIndex];
+            const step = PART2_SCRIPT[stepIndex];
             stepIndex++;
 
             // 1. Banner Sistem WA
             if (step.type === "system") {
-                const isDatePill = step.text === "Hari ini";
                 const el = document.createElement("div");
                 el.className = "self-center my-1.5 max-w-[92%] animate-bubble";
-                el.innerHTML = isDatePill
-                    ? `<div class="bg-white/90 text-[#54656F] text-[11.5px] font-semibold px-3 py-1 rounded-lg shadow-2xs">${step.text}</div>`
-                    : `<div class="bg-[#FFF5C4]/95 text-[#54656F] text-[11px] leading-snug px-3 py-1.5 rounded-lg text-center shadow-2xs border border-amber-200/70">${step.text}</div>`;
+                el.innerHTML = `<div class="bg-white/90 text-[#54656F] text-[11.5px] font-semibold px-3 py-1 rounded-lg shadow-2xs">${step.text}</div>`;
                 chatBody.appendChild(el);
-            }
 
-            // 2. Save Kontak Dinamis
-            else if (step.type === "save_contact") {
-                contactSaved = true;
-                waContactName.textContent = step.newName;
-                waContactSub.textContent = step.newSub;
-                showToast(step.toastText);
+                // Langsung lanjut render pesan pertama setelah pill "Hari ini"
                 setTimeout(() => {
-                    if (!isAutoPlay) nextStep();
-                }, 420);
+                    if (stepIndex < PART2_SCRIPT.length && PART2_SCRIPT[stepIndex].sender === "aku") {
+                        renderStepImmediate();
+                    }
+                }, 140);
             }
 
-            // 3. Update Status Terakhir Dilihat
+            // 2. Update Status Terakhir Dilihat
             else if (step.type === "status_update") {
                 waContactSub.textContent = step.newSub;
                 setTimeout(() => {
@@ -1194,51 +1406,51 @@
                 }, 320);
             }
 
-            // 4. Slide-up Overlay Tweet Private Account
+            // 3. Slide-up Overlay Tweet Private Account
             else if (step.type === "tweet") {
                 pauseAutoPlay();
                 openTweetOverlay(step);
                 return;
             }
 
-            // 5. Kartu Akhir Part 1 / 50
-            else if (step.type === "end_part1") {
+            // 4. Kartu Akhir Part 2 / 50
+            else if (step.type === "end_part2") {
                 pauseAutoPlay();
-                tapHintText.textContent = "Part 1 / 50 Selesai • Lanjut ke Part 2 nanti";
+                tapHintText.textContent = "Part 2 / 50 Selesai • Lanjut ke Part 3 nanti";
 
                 const card = document.createElement("div");
                 card.className = "my-4 p-4 rounded-2xl bg-white/95 border border-gray-200 shadow-lg text-center animate-bubble";
                 card.innerHTML = `
                     <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-red-600 border border-red-200 text-[10.5px] font-extrabold tracking-wider">
-                        PART 1 / 50 SELESAI
+                        PART 2 / 50 SELESAI
                     </span>
                     <h3 class="text-[17px] font-extrabold text-gray-900 mt-2">
-                        paket salah pintu
+                        penghuni lama
                     </h3>
                     <div class="mt-3 p-3 rounded-xl bg-gray-50 border border-gray-200/80 text-left">
                         <p class="text-[10.5px] font-bold uppercase tracking-wider text-gray-400">
-                            Teaser Part 2 / 50
+                            Teaser Part 3 / 50
                         </p>
                         <p class="text-[13.5px] font-bold text-gray-900 mt-0.5">
-                            "penghuni lama"
+                            "grup penghuni lantai dua"
                         </p>
                         <p class="text-[12px] text-gray-600 mt-1 leading-relaxed">
-                            Besok paginya, Kina baru sadar kardus di depan kamar 205 ternyata sudah berdebu dan bertuliskan nama penghuni lama yang pindah sejak semester lalu...
+                            Pulang kuliah sore nanti, Kina iseng nanya soal nama Raka ke grup penghuni kosan lantai dua—tapi chat-nya malah cuma di-read tanpa satu pun yang berani bales...
                         </p>
                     </div>
                     <div class="mt-3.5 grid grid-cols-2 gap-2">
                         <button onclick="openCoverScreen()" class="py-2.5 px-3 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-95 text-gray-800 text-[12px] font-bold transition">
-                            ← Sampul AU
+                            ← Sampul Part 2
                         </button>
                         <button onclick="resetStory()" class="py-2.5 px-3 rounded-xl bg-ios-blue hover:bg-blue-600 active:scale-95 text-white text-[12px] font-bold shadow-xs transition">
-                            Ulangi Part 1
+                            Ulangi Part 2
                         </button>
                     </div>
                 `;
                 chatBody.appendChild(card);
             }
 
-            // 6. Bubble Chat WhatsApp (Teks, Quote-Reply, & PAP Gambar)
+            // 5. Bubble Chat WhatsApp (Teks, Quote-Reply, & PAP Gambar)
             else {
                 const isOut = step.sender === "aku";
                 playPopSound(isOut ? "out" : "in");
@@ -1248,9 +1460,7 @@
 
                 let quoteBlock = "";
                 if (step.type === "reply") {
-                    const qName = step.quoteSender === "aku"
-                        ? "Anda"
-                        : (contactSaved ? "esa kamar 205" : "+62 813-7741-9028");
+                    const qName = step.quoteSender === "aku" ? "Anda" : "esa kamar 205";
                     quoteBlock = `
                         <div class="mb-1.5 rounded-lg bg-black/[0.045] border-l-[3.5px] border-[#06CF9C] px-2.5 py-1.5 text-left">
                             <p class="text-[11.5px] font-bold text-[#059669] leading-tight">${qName}</p>
@@ -1261,13 +1471,14 @@
 
                 let imageBlock = "";
                 if (step.type === "image") {
-                    const imgSrc = MEDIA_CONFIG[step.slot] || FALLBACK_MEDIA.esaPap;
+                    const imgSrc = MEDIA_CONFIG[step.slot] || FALLBACK_MEDIA.esaGlasses;
+                    const zoomLabel = step.slot === "kardus205" ? "Lorong Depan Kamar 205" : "PAP Esa";
                     imageBlock = `
                         <div class="relative mb-1.5 rounded-xl overflow-hidden bg-zinc-900 group">
                             <img src="${imgSrc}"
-                                 onerror="handleImgError(this, '${step.slot || "esaPap"}')"
-                                 onclick="openLightbox(this.src, 'PAP Kamar 205')"
-                                 alt="PAP Kamar 205"
+                                 onerror="handleImgError(this, '${step.slot || "esaGlasses"}')"
+                                 onclick="openLightbox(this.src, '${zoomLabel}')"
+                                 alt="${zoomLabel}"
                                  class="w-full max-h-60 object-cover cursor-zoom-in transition duration-200 group-hover:brightness-95">
                             <span class="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full pointer-events-none">
                                 Ketuk untuk zoom
@@ -1305,7 +1516,7 @@
         }
 
         // =========================================================================
-        // 5. TWITTER / X PRIVATE ACCOUNT OVERLAY CONTROLS
+        // 4. TWITTER / X PRIVATE ACCOUNT OVERLAY CONTROLS
         // =========================================================================
         function openTweetOverlay(step) {
             tweetLiked = false;
@@ -1321,7 +1532,7 @@
             const mediaImg = document.getElementById("tw-media-img");
             if (step.mediaSlot) {
                 mediaBox.classList.remove("hidden");
-                mediaImg.src = MEDIA_CONFIG[step.mediaSlot] || MEDIA_CONFIG.kinaNight;
+                mediaImg.src = MEDIA_CONFIG[step.mediaSlot] || MEDIA_CONFIG.kinaSpiky;
             } else {
                 mediaBox.classList.add("hidden");
             }
@@ -1374,7 +1585,7 @@
         }
 
         // =========================================================================
-        // 6. FULL-SCREEN LIGHTBOX VIEWER
+        // 5. FULL-SCREEN LIGHTBOX VIEWER
         // =========================================================================
         function openLightbox(src, caption) {
             document.getElementById("lightbox-img").src = src;
@@ -1387,7 +1598,7 @@
         }
 
         // =========================================================================
-        // 7. AUTO-PLAY, SUARA, SCROLL & RESET
+        // 6. AUTO-PLAY, SUARA, SCROLL & RESET
         // =========================================================================
         function toggleAutoPlay() {
             if (isAutoPlay) {
@@ -1406,7 +1617,7 @@
             clearTimeout(autoTimer);
             document.getElementById("auto-dot").classList.replace("bg-emerald-400", "bg-gray-400");
             document.getElementById("auto-label").textContent = "Auto";
-            if (stepIndex < PART1_SCRIPT.length) {
+            if (stepIndex < PART2_SCRIPT.length) {
                 tapHintText.textContent = "Ketuk layar atau bar ini untuk lanjut...";
             }
         }
@@ -1429,11 +1640,9 @@
         function resetStory() {
             pauseAutoPlay();
             isBusy = false;
-            contactSaved = false;
             stepIndex = 0;
 
-            waContactName.textContent = "+62 813-7741-9028";
-            waContactSub.textContent = "~esa • online";
+            waContactSub.textContent = "terakhir dilihat hari ini pukul 01.47";
             waContactSub.classList.remove("text-emerald-600", "font-medium");
 
             chatBody.innerHTML = "";
@@ -1444,9 +1653,7 @@
             tapHintText.textContent = "Ketuk layar atau bar ini untuk lanjut...";
 
             renderStepImmediate();
-            renderStepImmediate();
-            renderStepImmediate();
-            showToast("Part 1 diulang dari awal");
+            showToast("Part 2 diulang dari awal");
         }
 
         let toastTimer = null;
