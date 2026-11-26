@@ -363,15 +363,15 @@
                 </div>
 
                 <!-- Konten Sampul -->
-                <div class="flex-1 min-h-0 overflow-y-auto px-5 pt-7 pb-4 flex flex-col justify-between gap-5">
+                <div class="flex-1 min-h-0 overflow-y-auto px-5 pt-6 pb-4 flex flex-col justify-between gap-5">
                     <!-- Header Genre & Judul AU -->
                     <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/75 border border-red-500/35 text-red-300 text-[10.5px] font-extrabold tracking-widest uppercase">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/75 border border-red-500/35 text-red-300 text-[10.5px] font-extrabold tracking-widest uppercase mb-3">
                             <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                            <span>AU HOROR • SLOW-BURN • PART 02 / 50</span>
+                            <span>PART 02 / 50</span>
                         </div>
 
-                        <h1 class="mt-4 text-[36px] font-black tracking-tight text-white leading-[1.04]">
+                        <h1 class="mt-2 text-[36px] font-black tracking-tight text-white leading-[1.04]">
                             KAMAR <span class="text-red-500">205</span>
                         </h1>
 
@@ -1416,7 +1416,7 @@
             // 4. Kartu Akhir Part 2 / 50
             else if (step.type === "end_part2") {
                 pauseAutoPlay();
-                tapHintText.textContent = "Part 2 / 50 Selesai • Lanjut ke Part 3 nanti";
+                tapHintText.textContent = "Part 2 / 50 Selesai";
 
                 const card = document.createElement("div");
                 card.className = "my-4 p-4 rounded-2xl bg-white/95 border border-gray-200 shadow-lg text-center animate-bubble";
@@ -1432,10 +1432,10 @@
                             Teaser Part 3 / 50
                         </p>
                         <p class="text-[13.5px] font-bold text-gray-900 mt-0.5">
-                            "grup penghuni lantai dua"
+                            "ketemu di kantin"
                         </p>
                         <p class="text-[12px] text-gray-600 mt-1 leading-relaxed">
-                            Pulang kuliah sore nanti, Kina iseng nanya soal nama Raka ke grup penghuni kosan lantai dua—tapi chat-nya malah cuma di-read tanpa satu pun yang berani bales...
+                            Lupakan dulu urusan kardus misterius di depan kamar 205. Siang itu di kantin kampus bareng Sasa, Kina baru sadar kalau tetangga barunya yang sok asik ternyata satu kampus sama dia...
                         </p>
                     </div>
                     <div class="mt-3.5 grid grid-cols-2 gap-2">
