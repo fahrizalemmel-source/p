@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AU Kamar 205 — Part 1: paket salah pintu</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Inter', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        ios: {
+                            blue: '#007AFF',
+                            bar: '#F6F6F6',
+                            border: '#D1D1D6',
+                            waBg: '#EFEAE2',
+                            waOut: '#DCF8C6',
+                            waIn: '#FFFFFF',
+                            waText: '#111B21',
+                            waMuted: '#667781',
+                            waCheck: '#34B7F1',
+                            twBlue: '#1D9BF0',
+                            twPink: '#F91880'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ==================== 1. STRICT SINGLE-COLUMN FLEXBOX & ANDROID VIEWPORT LOCK ==================== */
+        :root {
+            --app-height: 100dvh;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100dvh;
+            height: var(--app-height, 100dvh);
+            max-height: var(--app-height, 100dvh);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            overscroll-behavior: none;
+            background-color: #111317;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+        }
+
+        .stage-outer {
+            width: 100%;
+            height: 100dvh;
+            height: var(--app-height, 100dvh);
+            max-height: var(--app-height, 100dvh);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #111317;
+        }
+
+        /* Kolom Terpusat Maksimal 430px */
+        .device-column {
+            position: relative;
+            width: 100%;
+            max-width: 430px;
+            height: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .device-column {
+                height: 95dvh;
+                max-height: 880px;
+                padding: 4px 0;
+                gap: 8px;
+            }
+        }
+
+        /* Top Control Bar di Atas Phone Frame */
+        .top-control-bar {
+            flex-shrink: 0;
+            width: 100%;
+            background-color: #191C23;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 7px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            z-index: 20;
+        }
+
+        @media (min-width: 480px) {
+            .top-control-bar {
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* ==================== 2. TRANSISI SAMPUL AU <-> ROOM CHAT ==================== */
+        #cover-screen {
+            position: absolute;
+            inset: 0;
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: radial-gradient(circle at 82% 14%, rgba(185, 28, 28, 0.24) 0%, rgba(24, 12, 16, 0.94) 44%, #090A0E 100%);
+            transition: opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @media (min-width: 480px) {
+            #cover-screen {
+                inset: 4px 0;
+                border-radius: 28px;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.85);
+            }
+        }
+
+        #cover-screen.cover-hidden {
+            opacity: 0;
+            transform: scale(0.97) translateY(-10px);
+            pointer-events: none;
+        }
+
+        .cover-grain {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 0);
+            background-size: 18px 18px;
+        }
+
+        #rc-screen {
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @media (min-width: 480px) {
+            #rc-screen {
+                gap: 8px;
+            }
+        }
+
+        #rc-screen.rc-standby {
+            opacity: 0;
+            transform: scale(1.02) translateY(12px);
+            pointer-events: none;
+        }
+
+        #rc-screen.rc-active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Phone Frame Utama */
+        .phone-frame {
+            position: relative;
+            flex: 1 1 0%;
+            min-height: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: #EFEAE2;
+        }
+
+        @media (min-width: 480px) {
+            .phone-frame {
+                border-radius: 28px;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        /* Header WhatsApp Sticky di Atas Flex */
+        .wa-header {
+            flex-shrink: 0;
+            width: 100%;
+            z-index: 10;
+            background-color: rgba(246, 246, 246, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #D1D1D6;
+        }
+
+        /* Stage Tengah untuk Chat Body & Tombol Melayang Scroll Down */
+        .chat-stage {
+            position: relative;
+            flex: 1 1 0%;
+            min-height: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Area Riwayat Obrolan Scrollable */
+        #chat-body {
+            flex: 1 1 0%;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+            touch-action: pan-y;
+            padding: 12px 12px 24px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* Footer Input Bar WhatsApp Sticky di Bawah Flex */
+        .wa-footer {
+            flex-shrink: 0;
+            width: 100%;
+            z-index: 10;
+            background-color: #F6F6F6;
+            border-top: 1px solid #D1D1D6;
+        }
+
+        /* ==================== 3. WALLPAPER & BUBBLE CHAT WHATSAPP iOS ==================== */
+        .wa-wallpaper {
+            background-color: #EFEAE2;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%239C8E7B' stroke-width='1.1' stroke-opacity='0.12'%3E%3Cpath d='M20 22c4-4 10-4 14 0s4 10 0 14-10 4-14 0-4-10 0-14z'/%3E%3Cpath d='M75 18l10 6-4 11-11-2z'/%3E%3Cpath d='M22 82c6-5 14-5 20 0'/%3E%3Ccircle cx='32' cy='90' r='2'/%3E%3Cpath d='M82 78h16v12H82z'/%3E%3Cpath d='M86 78v-4a4 4 0 018 0v4'/%3E%3Cpath d='M54 50l6 6m0-6l-6 6'/%3E%3Cpath d='M14 54a6 6 0 1012 0 6 6 0 10-12 0'/%3E%3Cpath d='M96 48c3 0 6 3 6 6s-3 6-6 6'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        .bubble-in {
+            position: relative;
+            background: #FFFFFF;
+            color: #111B21;
+            box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.08);
+        }
+        .bubble-in::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: -5px;
+            width: 11px;
+            height: 13px;
+            background: #FFFFFF;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        }
+
+        .bubble-out {
+            position: relative;
+            background: #DCF8C6;
+            color: #111B21;
+            box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.08);
+        }
+        .bubble-out::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: -5px;
+            width: 11px;
+            height: 13px;
+            background: #DCF8C6;
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+        }
+
+        /* ==================== 4. SCROLLBAR, ANIMASI & TWEET OVERLAY ==================== */
+        #chat-body::-webkit-scrollbar {
+            width: 4px;
+        }
+        #chat-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #chat-body::-webkit-scrollbar-thumb {
+            background: rgba(120, 113, 108, 0.28);
+            border-radius: 9999px;
+        }
+
+        @keyframes bubbleEnter {
+            0% {
+                opacity: 0;
+                transform: translateY(8px) scale(0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .animate-bubble {
+            animation: bubbleEnter 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .dot-typing {
+            animation: dotPulse 1.3s infinite ease-in-out both;
+        }
+        .dot-typing:nth-child(1) { animation-delay: -0.32s; }
+        .dot-typing:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes dotPulse {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.35; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Smooth Slide-Up iOS Twitter/X Overlay */
+        #tweet-overlay {
+            transform: translateY(100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+        }
+        #tweet-overlay.overlay-open {
+            transform: translateY(0%);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Tombol Melayang Panah Bawah */
+        #scroll-bottom-btn {
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        #scroll-bottom-btn.btn-hidden {
+            opacity: 0;
+            transform: translateY(8px) scale(0.9);
+            pointer-events: none;
+        }
+        #scroll-bottom-btn.btn-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stage-outer">
+        <div class="device-column">
+
+            <!-- ==================== SCREEN 1: SAMPUL AU (COVER PAGE) ==================== -->
+            <section id="cover-screen" class="cover-grain select-none" aria-label="Sampul AU Kamar 205">
+                <!-- Watermark Nomor Kamar di Latar -->
+                <div class="pointer-events-none absolute -right-4 top-8 text-[118px] font-black tracking-tighter text-white/[0.03] leading-none">
+                    205
+                </div>
+
+                <!-- Konten Sampul -->
+                <div class="flex-1 min-h-0 overflow-y-auto px-5 pt-7 pb-4 flex flex-col justify-between gap-5">
+                    <!-- Header Genre & Judul AU -->
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/75 border border-red-500/35 text-red-300 text-[10.5px] font-extrabold tracking-widest uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                            <span>AU HOROR • SLOW-BURN • PART 01 / 50</span>
+                        </div>
+
+                        <h1 class="mt-4 text-[36px] font-black tracking-tight text-white leading-[1.04]">
+                            KAMAR <span class="text-red-500">205</span>
+                        </h1>
+
+                        <p class="mt-1.5 text-[14.5px] font-semibold text-gray-300">
+                            Part 1 — <span class="text-red-300/95 italic">"paket salah pintu"</span>
+                        </p>
+
+                        <div class="mt-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10">
+                            <p class="text-[12.5px] text-gray-300/90 leading-relaxed">
+                                "Pindahan ke kosan baru harusnya tenang-tenang aja. Sampai paket nyasar nganter Kina kenalan sama penghuni kamar sebelah—dan lampu sensor lorong lantai dua yang nyala sendiri tiap lewat tengah malam."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Cast Preview (Statis & Ringan) -->
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2.5">
+                            Karakter Utama
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Kartu Cast 1: Esa -->
+                            <div class="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center text-center">
+                                <img id="cover-prev-esaPP"
+                                     src=""
+                                     onerror="handleImgError(this, 'esaPP')"
+                                     alt="Esa"
+                                     class="w-16 h-16 rounded-full object-cover border-2 border-red-500/45 shadow-md bg-zinc-900">
+                                <p class="mt-2.5 text-[13.5px] font-extrabold text-white leading-tight">Esa</p>
+                                <p class="text-[10.5px] text-gray-400 mt-0.5 leading-tight">Kamar 205 • Tetangga Baru</p>
+                            </div>
+
+                            <!-- Kartu Cast 2: Kina -->
+                            <div class="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center text-center">
+                                <img id="cover-prev-kinaPP"
+                                     src=""
+                                     onerror="handleImgError(this, 'kinaPP')"
+                                     alt="Kina"
+                                     class="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-md bg-zinc-900">
+                                <p class="mt-2.5 text-[13.5px] font-extrabold text-white leading-tight">Kina</p>
+                                <p class="text-[10.5px] text-gray-400 mt-0.5 leading-tight">Kamar 204 • @kinabukanaku</p>
+                            </div>
+                        </div>
+
+                        <p class="mt-3 text-[11px] text-gray-400/80 text-center">
+                            Ketuk layar di dalam ruang obrolan untuk memunculkan percakapan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Footer CTA Sampul: Masuk ke Room Chat -->
+                <div class="p-4 pt-3 border-t border-white/10 bg-black/50 shrink-0">
+                    <button onclick="enterRoomChat()" style="touch-action: manipulation;" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-red-700 via-red-600 to-rose-600 hover:from-red-600 hover:to-rose-500 active:scale-[0.98] text-white text-[14.5px] font-extrabold tracking-wide shadow-lg shadow-red-950/60 flex items-center justify-center gap-2 transition">
+                        <span>Masuk ke Room Chat</span>
+                        <span class="text-base">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==================== SCREEN 2: WHATSAPP ROOM CHAT (RC) ==================== -->
+            <div id="rc-screen" class="rc-standby">
+
+                <!-- TOP CONTROL BAR (RINGAN TANPA TOMBOL FOTO) -->
+                <div class="top-control-bar select-none">
+                    <!-- Kiri: Tombol Sampul + Badge Part -->
+                    <div class="flex items-center gap-1.5 min-w-0">
+                        <button onclick="openCoverScreen()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 text-[11px] font-semibold flex items-center gap-1 transition shrink-0" title="Kembali ke Sampul AU">
+                            <svg class="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                            <span>Sampul</span>
+                        </button>
+
+                        <span class="px-2.5 py-1 rounded-full bg-red-500/15 border border-red-500/35 text-red-400 text-[10.5px] font-extrabold tracking-wide shrink-0">
+                            PART 1 / 50
+                        </span>
+                    </div>
+
+                    <!-- Kanan: Auto, Suara, Reset -->
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button id="btn-auto" onclick="toggleAutoPlay()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 text-[11px] font-semibold flex items-center gap-1.5 transition" title="Putar Otomatis">
+                            <span id="auto-dot" class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                            <span id="auto-label">Auto</span>
+                        </button>
+
+                        <button onclick="toggleSound()" class="p-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 transition" title="Efek Suara">
+                            <svg id="icon-sound-on" class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                            </svg>
+                            <svg id="icon-sound-off" class="w-3.5 h-3.5 text-gray-400 hidden" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+                            </svg>
+                        </button>
+
+                        <button onclick="resetStory()" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-gray-200 border border-white/10 text-[11px] font-semibold transition" title="Ulangi Part 1">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MOBILE PHONE FRAME -->
+                <div id="phone-container" class="phone-frame">
+
+                    <!-- Toast Notifikasi Dalam Layar -->
+                    <div id="wa-toast" class="hidden absolute top-16 left-1/2 -translate-x-1/2 z-40 px-3.5 py-1.5 rounded-full bg-zinc-900/90 text-white text-[11.5px] font-semibold shadow-lg whitespace-nowrap pointer-events-none">
+                        Notifikasi
+                    </div>
+
+                    <!-- 1. WHATSAPP iOS HEADER -->
+                    <header class="wa-header px-2.5 py-2 flex items-center justify-between select-none">
+                        <div class="flex items-center gap-1.5 min-w-0">
+                            <button onclick="openCoverScreen()" class="p-1 text-ios-blue flex items-center hover:opacity-75 transition shrink-0" title="Kembali ke Sampul">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+
+                            <img id="wa-header-avatar"
+                                 src=""
+                                 onerror="handleImgError(this, 'esaPP')"
+                                 alt="PP Esa"
+                                 class="w-9 h-9 rounded-full object-cover border border-gray-300 shrink-0 bg-zinc-900">
+
+                            <div class="flex flex-col min-w-0 ml-1 leading-tight">
+                                <span id="wa-contact-name" class="text-[15px] font-bold text-gray-900 truncate">
+                                    +62 813-7741-9028
+                                </span>
+                                <span id="wa-contact-sub" class="text-[11.5px] text-ios-waMuted truncate">
+                                    ~esa • online
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Ikon Video Call & Telepon -->
+                        <div class="flex items-center gap-3.5 pr-1.5 text-ios-blue shrink-0">
+                            <svg class="w-5 h-5 opacity-90" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                            <svg class="w-5 h-5 opacity-90" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                        </div>
+                    </header>
+
+                    <!-- 2. CHAT STAGE (SCROLLABLE AREA + TYPING INDICATOR + SCROLL DOWN BTN) -->
+                    <div class="chat-stage wa-wallpaper">
+                        <main id="chat-body" aria-live="polite"></main>
+
+                        <!-- Indikator Sedang Mengetik -->
+                        <div id="typing-indicator" class="hidden px-3 pb-2 shrink-0">
+                            <div class="inline-flex items-center gap-1 bg-white px-3.5 py-2 rounded-2xl rounded-bl-xs shadow-xs">
+                                <span class="w-1.5 h-1.5 rounded-full bg-gray-400 dot-typing"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-gray-400 dot-typing"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-gray-400 dot-typing"></span>
+                            </div>
+                        </div>
+
+                        <!-- Tombol Melayang Panah Bawah -->
+                        <button id="scroll-bottom-btn" onclick="scrollToLatest(true)" class="btn-hidden absolute bottom-3 right-3 z-20 w-9 h-9 rounded-full bg-white/95 text-gray-700 border border-gray-300 shadow-md flex items-center justify-center active:scale-90" title="Ke pesan terbaru">
+                            <span id="unread-scroll-dot" class="hidden absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-ios-blue"></span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- 3. WHATSAPP iOS FOOTER INPUT BAR -->
+                    <footer class="wa-footer px-2.5 py-2 flex items-center gap-2 select-none">
+                        <button onclick="nextStep()" class="text-ios-blue p-1 shrink-0 active:scale-90 transition" title="Lanjut">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                            </svg>
+                        </button>
+
+                        <button onclick="nextStep()" style="touch-action: manipulation;" class="flex-1 min-w-0 bg-white border border-gray-300 rounded-full px-3.5 py-1.5 flex items-center justify-between text-left active:bg-gray-50 transition">
+                            <span id="tap-hint-text" class="text-[13px] text-gray-500 truncate">
+                                Ketuk layar atau bar ini untuk lanjut...
+                            </span>
+                            <svg class="w-4 h-4 text-ios-blue shrink-0 ml-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </button>
+
+                        <div class="flex items-center gap-2 text-ios-blue shrink-0 pr-0.5">
+                            <svg class="w-5 h-5 opacity-90" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <svg class="w-5 h-5 opacity-90" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                            </svg>
+                        </div>
+                    </footer>
+
+                    <!-- 4. TWITTER / X PRIVATE ACCOUNT OVERLAY (ini kina 🔒 @kinabukanaku) -->
+                    <section id="tweet-overlay" class="absolute inset-0 bg-white z-30 flex flex-col justify-between overflow-hidden" aria-label="Tweet Private Account Kina">
+                        <!-- Header Twitter iOS -->
+                        <div class="px-3 py-2.5 border-b border-gray-200 flex items-center justify-between shrink-0 bg-white">
+                            <button onclick="closeTweetOverlay()" class="p-1 text-ios-twBlue flex items-center active:opacity-70">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+                            <span class="text-[16px] font-extrabold text-gray-900">Tweet</span>
+                            <span class="w-7"></span>
+                        </div>
+
+                        <!-- Isi Tweet Scrollable -->
+                        <div class="flex-1 min-h-0 overflow-y-auto px-4 pt-3.5 pb-6">
+                            <!-- Info Akun -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <img id="tw-avatar"
+                                         src=""
+                                         onerror="handleImgError(this, 'kinaPP')"
+                                         alt="PP Kina"
+                                         class="w-11 h-11 rounded-full object-cover border border-gray-200 bg-gray-100">
+                                    <div class="flex flex-col leading-tight">
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-[15px] font-bold text-gray-900">ini kina</span>
+                                            <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M17 9h-1V7a4 4 0 00-8 0v2H7a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2v-8a2 2 0 00-2-2zm-7-2a2 2 0 114 0v2h-4V7z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-[13px] text-gray-500">@kinabukanaku</span>
+                                    </div>
+                                </div>
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+
+                            <!-- Teks Tweet Utama -->
+                            <p id="tw-main-text" class="mt-3.5 text-[17px] leading-[1.42] text-gray-900 font-normal whitespace-pre-line"></p>
+
+                            <!-- Foto Lampiran Tweet -->
+                            <div id="tw-media-box" class="hidden mt-3 rounded-2xl overflow-hidden border border-gray-200 bg-gray-100">
+                                <img id="tw-media-img"
+                                     src=""
+                                     onerror="handleImgError(this, 'kinaNight')"
+                                     alt="Foto Tweet Kina"
+                                     onclick="openLightbox(this.src, 'Foto Tweet Kina (@kinabukanaku)')"
+                                     class="w-full max-h-64 object-cover cursor-zoom-in">
+                            </div>
+
+                            <!-- Kotak Quote Tweet -->
+                            <div id="tw-quote-box" class="hidden mt-3 border border-gray-200 rounded-2xl p-3 bg-gray-50/70">
+                                <div class="flex items-center gap-1.5 text-[13px]">
+                                    <img id="tw-quote-avatar" src="" onerror="handleImgError(this, 'kinaPP')" alt="Kina" class="w-4 h-4 rounded-full object-cover">
+                                    <span class="font-bold text-gray-900">ini kina</span>
+                                    <svg class="w-3 h-3 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17 9h-1V7a4 4 0 00-8 0v2H7a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2v-8a2 2 0 00-2-2zm-7-2a2 2 0 114 0v2h-4V7z"/>
+                                    </svg>
+                                    <span class="text-gray-500 truncate">@kinabukanaku · <span id="tw-quote-age">2m</span></span>
+                                </div>
+                                <p id="tw-quote-text" class="mt-1 text-[13.5px] text-gray-800 leading-snug"></p>
+                            </div>
+
+                            <!-- Timestamp Tweet -->
+                            <div class="mt-3.5 pb-3 border-b border-gray-200 text-[13px] text-gray-500 flex items-center gap-1">
+                                <span id="tw-timestamp">19.43 · 26/11/26</span>
+                                <span>·</span>
+                                <span class="text-ios-twBlue">Twitter for iPhone</span>
+                            </div>
+
+                            <!-- Bar Ikon Interaksi Twitter -->
+                            <div class="py-2.5 border-b border-gray-200 flex items-center justify-around text-gray-500 select-none">
+                                <button class="flex items-center gap-1.5 hover:text-ios-twBlue transition">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                    </svg>
+                                </button>
+                                <button class="flex items-center gap-1.5 hover:text-emerald-500 transition">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                    </svg>
+                                </button>
+                                <button onclick="toggleTweetLike()" class="flex items-center gap-1 hover:text-ios-twPink transition">
+                                    <svg id="tw-like-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                    <span id="tw-like-count" class="text-[12px] font-medium"></span>
+                                </button>
+                                <button class="flex items-center gap-1.5 hover:text-ios-twBlue transition">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Reply Thread di Bawah Tweet Utama -->
+                            <div id="tw-reply-section" class="hidden pt-3.5 flex items-start gap-2.5">
+                                <img id="tw-reply-avatar" src="" onerror="handleImgError(this, 'kinaPP')" alt="Kina" class="w-10 h-10 rounded-full object-cover border border-gray-200 shrink-0">
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-1 text-[13.5px] flex-wrap">
+                                        <span class="font-bold text-gray-900">ini kina</span>
+                                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M17 9h-1V7a4 4 0 00-8 0v2H7a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2v-8a2 2 0 00-2-2zm-7-2a2 2 0 114 0v2h-4V7z"/>
+                                        </svg>
+                                        <span class="text-gray-500">@kinabukanaku · <span id="tw-reply-age">1m</span></span>
+                                    </div>
+                                    <p class="text-[12.5px] text-gray-500 mt-0.5">
+                                        Replying to <span class="text-ios-twBlue">@kinabukanaku</span>
+                                    </p>
+                                    <p id="tw-reply-text" class="mt-1 text-[15px] text-gray-900 leading-snug"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Tombol Kembali ke Chat WA -->
+                        <div class="p-3.5 border-t border-gray-200 bg-gray-50 shrink-0">
+                            <button id="tw-close-btn" onclick="closeTweetOverlay()" style="touch-action: manipulation;" class="w-full py-3.5 px-4 rounded-full bg-gray-900 hover:bg-black active:scale-[0.98] text-white text-[14px] font-semibold shadow-md transition flex items-center justify-center gap-2">
+                                <span id="tw-close-label">Kembali ke Chat WhatsApp</span>
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+            <!-- 5. LIGHTBOX FULL-SCREEN IMAGE VIEWER -->
+            <div id="lightbox-modal" style="display: none;" onclick="closeLightbox()" class="absolute inset-0 bg-black/95 z-50 flex-col justify-between p-4 select-none">
+                <div class="flex items-center justify-between text-white/90 text-xs shrink-0">
+                    <span id="lightbox-caption" class="font-semibold truncate pr-2">Lampiran Foto</span>
+                    <button onclick="closeLightbox()" class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 text-white font-bold flex items-center justify-center shrink-0">
+                        ✕
+                    </button>
+                </div>
+
+                <div class="flex-1 min-h-0 flex items-center justify-center overflow-hidden my-3">
+                    <img id="lightbox-img" src="" alt="Zoom Foto" class="max-w-full max-h-full rounded-2xl object-contain shadow-2xl">
+                </div>
+
+                <p class="text-center text-[11.5px] text-gray-400 shrink-0">
+                    Ketuk di mana saja untuk menutup pratinjau
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ENGINE & NASKAH PART 1: "paket salah pintu" ==================== -->
+    <script>
+        // =========================================================================
+        // 2. KONFIGURASI FOTO ONLINE (LANGSUNG DARI PINIMG, RINGAN & SIAP HOSTING)
+        // =========================================================================
+        const FALLBACK_MEDIA = {
+            esaPP: "https://placehold.co/300x300/18181B/FCA5A5?text=ESA+205",
+            kinaPP: "https://placehold.co/300x300/18181B/93C5FD?text=KINA+204",
+            esaPap: "https://placehold.co/600x650/1C1917/FCD34D?text=PAP+KAMAR+205",
+            kinaNight: "https://placehold.co/600x600/0F172A/93C5FD?text=MALAM+205"
+        };
+
+        const MEDIA_CONFIG = {
+            // 1. Foto PP Esa (Lucas jaket merah)
+            esaPP: "https://i.pinimg.com/736x/f7/b6/e4/f7b6e4dc110b5f78c8200c4b7e4e3690.jpg",
+
+            // 2. Foto PP Kina (Yuqi lagi minum)
+            kinaPP: "https://i.pinimg.com/736x/2e/63/ff/2e63ffe87b6620759003de7519511d49.jpg",
+
+            // 3. Foto PAP Esa di Kamar 205
+            esaPap: "https://i.pinimg.com/736x/07/6d/3b/076d3b37871887cba35f3612dab1f850.jpg",
+
+            // 4. Foto Suasana Malam Kina (Scene 5)
+            kinaNight: "https://i.pinimg.com/736x/43/64/83/436483670b153f098ffb2c7c7429e9de.jpg"
+        };
+
+        // Fallback bertingkat otomatis (/736x/ -> /564x/ -> /originals/ -> placeholder)
+        function handleImgError(img, slotKey) {
+            const currentSrc = img.src || "";
+            if (currentSrc.includes("/736x/")) {
+                img.src = currentSrc.replace("/736x/", "/564x/");
+            } else if (currentSrc.includes("/564x/")) {
+                img.src = currentSrc.replace("/564x/", "/originals/");
+            } else {
+                img.onerror = null;
+                img.src = FALLBACK_MEDIA[slotKey] || FALLBACK_MEDIA.esaPP;
+            }
+        }
+
+        function applyAvatarsToDOM() {
+            document.getElementById("wa-header-avatar").src = MEDIA_CONFIG.esaPP;
+            document.getElementById("cover-prev-esaPP").src = MEDIA_CONFIG.esaPP;
+            document.getElementById("cover-prev-kinaPP").src = MEDIA_CONFIG.kinaPP;
+
+            ["tw-avatar", "tw-quote-avatar", "tw-reply-avatar"].forEach((id) => {
+                document.getElementById(id).src = MEDIA_CONFIG.kinaPP;
+            });
+        }
+
+        // =========================================================================
+        // 3. NASKAH LENGKAP PART 1 / 50: "paket salah pintu"
+        // =========================================================================
+        const PART1_SCRIPT = [
+            // Pembuka Otomatis
+            { type: "system", text: "Hari ini" },
+            {
+                type: "system",
+                text: "🔒 Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them."
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "p",
+                time: "19.41",
+                typingMs: 500
+            },
+
+            // ==================== SCENE 1 (WHATSAPP - 19.41) ====================
+            {
+                type: "chat",
+                sender: "dia",
+                text: "kamar 204 ya?",
+                time: "19.41",
+                typingMs: 750
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "siapa",
+                time: "19.42"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "salah sambung kali",
+                time: "19.42"
+            },
+            {
+                type: "reply",
+                sender: "dia",
+                quoteSender: "unknown",
+                quoteText: "kamar 204 ya?",
+                text: "kagak salah",
+                time: "19.42",
+                typingMs: 750
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "paket shopee lo nyasar depan pintu gw",
+                time: "19.42",
+                typingMs: 900
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "nama penerimanya kina kinanti bener kan?",
+                time: "19.43",
+                typingMs: 950
+            },
+
+            // ==================== SCENE 2 (TWEET OVERLAY 1 - 19.43) ====================
+            {
+                type: "tweet",
+                mainText: "BARU JUGA PULANG NGAMPUS UDAH DISAMBUT NOMOR ASING SOK ASIK",
+                timestamp: "19.43 · 26/11/26",
+                quoteTweet: {
+                    age: "2m",
+                    text: "mana pp nya sok ganteng bgt pake jaket merah kek kang parkir indomaret"
+                },
+                reply: {
+                    age: "1m",
+                    text: "sok tau nama lengkap gue lagi, dapet nomor gue dr grup kosan kali ya"
+                }
+            },
+
+            // ==================== SCENE 3 (WHATSAPP - 19.44 - 19.47) ====================
+            {
+                type: "chat",
+                sender: "aku",
+                text: "lah kok bisa nyampe tempat lo",
+                time: "19.44"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "lo kamar brp",
+                time: "19.44"
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "205. sebelah persis",
+                time: "19.44",
+                typingMs: 800
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "gw baru pindahan kemaren malem",
+                time: "19.45",
+                typingMs: 850
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "terus paket gw skrg dmn",
+                time: "19.45"
+            },
+            {
+                type: "image",
+                sender: "dia",
+                slot: "esaPap",
+                caption: "aman di dalem kamar gw. sini ambil klo ga takut gw culik",
+                time: "19.46",
+                typingMs: 1100
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "dih najis",
+                time: "19.46"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "taro depan pintu aja ntar gw ambil",
+                time: "19.46"
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "galak amat neng",
+                time: "19.47",
+                typingMs: 700
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "save dulu nomor gw esa",
+                time: "19.47",
+                typingMs: 800
+            },
+
+            // ==================== SCENE 4 (SAVE KONTAK + DETAIL LORONG 205 + TWEET 2) ====================
+            {
+                type: "save_contact",
+                newName: "esa kamar 205",
+                newSub: "online",
+                toastText: "Kontak disimpan sebagai esa kamar 205"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "yaudah makasih",
+                time: "19.48"
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "udah lo taro depan pintu blm?",
+                time: "19.48"
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "udah tuh",
+                time: "19.49",
+                typingMs: 650
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "btw td pas gw buka pintu lorong, lampu sensor depan kamar lo kedip-kedip mulu",
+                time: "19.49",
+                typingMs: 1150
+            },
+            {
+                type: "chat",
+                sender: "aku",
+                text: "emg udah lama rusak itu, paling besok dibenerin mas penjaga",
+                time: "19.50"
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "oh kirain",
+                time: "19.50",
+                typingMs: 600
+            },
+            {
+                type: "chat",
+                sender: "dia",
+                text: "yaudah buruan ambil keburu ilang",
+                time: "19.51",
+                typingMs: 850
+            },
+            {
+                type: "status_update",
+                newSub: "terakhir dilihat hari ini pukul 20.14"
+            },
+            {
+                type: "tweet",
+                mainText: "paketnya beneran ditaro depan pintu dong mana ditindihin sendal jepit biar ga terbang 😭",
+                timestamp: "20.02 · 26/11/26",
+                reply: {
+                    age: "1m",
+                    text: "yaudah lah lumayan tetangga baru walau tengilnya minta ditampol"
+                }
+            },
+
+            // ==================== SCENE 5 (CLOSING TWEET OVERLAY 3) ====================
+            {
+                type: "tweet",
+                mainText: "akhirnya keluar kosan nyari nasi goreng sekalian kabur dr tetangga baru sok kenal",
+                mediaSlot: "kinaNight",
+                timestamp: "20.18 · 26/11/26",
+                reply: {
+                    age: "1m",
+                    text: "tp jujur td pas lewat depan 205 hawa lorongnya dingin bgt anjir padahal ac lorong mati"
+                },
+                closeButtonText: "Selesaikan Part 1"
+            },
+
+            // ==================== END OF PART 1 CARD ====================
+            {
+                type: "end_part1"
+            }
+        ];
+
+        // =========================================================================
+        // 4. ENGINE & INTERAKSI PENGGUNA
+        // =========================================================================
+        let stepIndex = 0;
+        let isBusy = false;
+        let isAutoPlay = false;
+        let soundEnabled = true;
+        let contactSaved = false;
+        let autoTimer = null;
+        let tweetLiked = false;
+
+        const chatBody = document.getElementById("chat-body");
+        const scrollBottomBtn = document.getElementById("scroll-bottom-btn");
+        const unreadScrollDot = document.getElementById("unread-scroll-dot");
+        const waContactName = document.getElementById("wa-contact-name");
+        const waContactSub = document.getElementById("wa-contact-sub");
+        const typingIndicator = document.getElementById("typing-indicator");
+        const tapHintText = document.getElementById("tap-hint-text");
+        const tweetOverlay = document.getElementById("tweet-overlay");
+
+        // Web Audio API Soft Pop Sound Effect
+        let audioCtx = null;
+        function playPopSound(direction = "in") {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === "suspended") {
+                    audioCtx.resume();
+                }
+
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(direction === "out" ? 560 : 440, now);
+                osc.frequency.exponentialRampToValueAtTime(direction === "out" ? 840 : 650, now + 0.065);
+
+                gain.gain.setValueAtTime(0.065, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.075);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } catch (e) {}
+        }
+
+        function initStory() {
+            applyAvatarsToDOM();
+            setupTapVsScroll();
+        }
+
+        // =========================================================================
+        // NAVIGASI SAMPUL AU <-> ROOM CHAT (RC)
+        // =========================================================================
+        function enterRoomChat() {
+            const cover = document.getElementById("cover-screen");
+            const rc = document.getElementById("rc-screen");
+
+            cover.classList.add("cover-hidden");
+            rc.classList.remove("rc-standby");
+            rc.classList.add("rc-active");
+
+            if (stepIndex === 0) {
+                setTimeout(() => {
+                    renderStepImmediate();
+                    renderStepImmediate();
+                    renderStepImmediate();
+                }, 180);
+            }
+        }
+
+        function openCoverScreen() {
+            pauseAutoPlay();
+            const cover = document.getElementById("cover-screen");
+            const rc = document.getElementById("rc-screen");
+
+            rc.classList.remove("rc-active");
+            rc.classList.add("rc-standby");
+            cover.classList.remove("cover-hidden");
+        }
+
+        // Pemisahan Gestur Tap vs Scroll
+        function setupTapVsScroll() {
+            let startX = 0;
+            let startY = 0;
+            let tracking = false;
+
+            chatBody.addEventListener("pointerdown", (e) => {
+                if (e.pointerType === "mouse" && e.button !== 0) return;
+                if (e.target.closest("button, img")) {
+                    tracking = false;
+                    return;
+                }
+                startX = e.clientX;
+                startY = e.clientY;
+                tracking = true;
+            }, { passive: true });
+
+            chatBody.addEventListener("pointerup", (e) => {
+                if (!tracking) return;
+                tracking = false;
+
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                if (Math.hypot(dx, dy) < 10) {
+                    if (tweetOverlay.classList.contains("overlay-open")) return;
+                    nextStep();
+                }
+            });
+
+            chatBody.addEventListener("pointercancel", () => {
+                tracking = false;
+            });
+
+            chatBody.addEventListener("scroll", () => {
+                const distFromBottom = chatBody.scrollHeight - chatBody.scrollTop - chatBody.clientHeight;
+                if (distFromBottom > 75) {
+                    scrollBottomBtn.classList.remove("btn-hidden");
+                    scrollBottomBtn.classList.add("btn-visible");
+                } else {
+                    scrollBottomBtn.classList.remove("btn-visible");
+                    scrollBottomBtn.classList.add("btn-hidden");
+                    unreadScrollDot.classList.add("hidden");
+                }
+            }, { passive: true });
+        }
+
+        function nextStep() {
+            if (isBusy) return;
+            if (tweetOverlay.classList.contains("overlay-open")) return;
+            if (stepIndex >= PART1_SCRIPT.length) return;
+
+            const step = PART1_SCRIPT[stepIndex];
+
+            if (step.sender === "dia" && step.typingMs) {
+                isBusy = true;
+                const delay = isAutoPlay ? step.typingMs : Math.min(step.typingMs, 850);
+
+                waContactSub.textContent = "mengetik...";
+                waContactSub.classList.add("text-emerald-600", "font-medium");
+                typingIndicator.classList.remove("hidden");
+                tapHintText.textContent = contactSaved ? "esa kamar 205 mengetik..." : "mengetik...";
+                scrollToLatest(true);
+
+                setTimeout(() => {
+                    isBusy = false;
+                    typingIndicator.classList.add("hidden");
+                    waContactSub.textContent = contactSaved ? "online" : "~esa • online";
+                    waContactSub.classList.remove("text-emerald-600", "font-medium");
+                    tapHintText.textContent = isAutoPlay ? "Mode Auto aktif..." : "Ketuk layar atau bar ini untuk lanjut...";
+
+                    renderStepImmediate();
+                    scheduleAutoPlay();
+                }, delay);
+            } else {
+                renderStepImmediate();
+                scheduleAutoPlay();
+            }
+        }
+
+        function renderStepImmediate() {
+            if (stepIndex >= PART1_SCRIPT.length) return;
+
+            const step = PART1_SCRIPT[stepIndex];
+            stepIndex++;
+
+            // 1. Banner Sistem WA
+            if (step.type === "system") {
+                const isDatePill = step.text === "Hari ini";
+                const el = document.createElement("div");
+                el.className = "self-center my-1.5 max-w-[92%] animate-bubble";
+                el.innerHTML = isDatePill
+                    ? `<div class="bg-white/90 text-[#54656F] text-[11.5px] font-semibold px-3 py-1 rounded-lg shadow-2xs">${step.text}</div>`
+                    : `<div class="bg-[#FFF5C4]/95 text-[#54656F] text-[11px] leading-snug px-3 py-1.5 rounded-lg text-center shadow-2xs border border-amber-200/70">${step.text}</div>`;
+                chatBody.appendChild(el);
+            }
+
+            // 2. Save Kontak Dinamis
+            else if (step.type === "save_contact") {
+                contactSaved = true;
+                waContactName.textContent = step.newName;
+                waContactSub.textContent = step.newSub;
+                showToast(step.toastText);
+                setTimeout(() => {
+                    if (!isAutoPlay) nextStep();
+                }, 420);
+            }
+
+            // 3. Update Status Terakhir Dilihat
+            else if (step.type === "status_update") {
+                waContactSub.textContent = step.newSub;
+                setTimeout(() => {
+                    if (!isAutoPlay) nextStep();
+                }, 320);
+            }
+
+            // 4. Slide-up Overlay Tweet Private Account
+            else if (step.type === "tweet") {
+                pauseAutoPlay();
+                openTweetOverlay(step);
+                return;
+            }
+
+            // 5. Kartu Akhir Part 1 / 50
+            else if (step.type === "end_part1") {
+                pauseAutoPlay();
+                tapHintText.textContent = "Part 1 / 50 Selesai • Lanjut ke Part 2 nanti";
+
+                const card = document.createElement("div");
+                card.className = "my-4 p-4 rounded-2xl bg-white/95 border border-gray-200 shadow-lg text-center animate-bubble";
+                card.innerHTML = `
+                    <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-red-600 border border-red-200 text-[10.5px] font-extrabold tracking-wider">
+                        PART 1 / 50 SELESAI
+                    </span>
+                    <h3 class="text-[17px] font-extrabold text-gray-900 mt-2">
+                        paket salah pintu
+                    </h3>
+                    <div class="mt-3 p-3 rounded-xl bg-gray-50 border border-gray-200/80 text-left">
+                        <p class="text-[10.5px] font-bold uppercase tracking-wider text-gray-400">
+                            Teaser Part 2 / 50
+                        </p>
+                        <p class="text-[13.5px] font-bold text-gray-900 mt-0.5">
+                            "penghuni lama"
+                        </p>
+                        <p class="text-[12px] text-gray-600 mt-1 leading-relaxed">
+                            Besok paginya, Kina baru sadar kardus di depan kamar 205 ternyata sudah berdebu dan bertuliskan nama penghuni lama yang pindah sejak semester lalu...
+                        </p>
+                    </div>
+                    <div class="mt-3.5 grid grid-cols-2 gap-2">
+                        <button onclick="openCoverScreen()" class="py-2.5 px-3 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-95 text-gray-800 text-[12px] font-bold transition">
+                            ← Sampul AU
+                        </button>
+                        <button onclick="resetStory()" class="py-2.5 px-3 rounded-xl bg-ios-blue hover:bg-blue-600 active:scale-95 text-white text-[12px] font-bold shadow-xs transition">
+                            Ulangi Part 1
+                        </button>
+                    </div>
+                `;
+                chatBody.appendChild(card);
+            }
+
+            // 6. Bubble Chat WhatsApp (Teks, Quote-Reply, & PAP Gambar)
+            else {
+                const isOut = step.sender === "aku";
+                playPopSound(isOut ? "out" : "in");
+
+                const row = document.createElement("div");
+                row.className = `flex w-full ${isOut ? "justify-end" : "justify-start"} animate-bubble`;
+
+                let quoteBlock = "";
+                if (step.type === "reply") {
+                    const qName = step.quoteSender === "aku"
+                        ? "Anda"
+                        : (contactSaved ? "esa kamar 205" : "+62 813-7741-9028");
+                    quoteBlock = `
+                        <div class="mb-1.5 rounded-lg bg-black/[0.045] border-l-[3.5px] border-[#06CF9C] px-2.5 py-1.5 text-left">
+                            <p class="text-[11.5px] font-bold text-[#059669] leading-tight">${qName}</p>
+                            <p class="text-[12px] text-gray-600 truncate mt-0.5">${step.quoteText}</p>
+                        </div>
+                    `;
+                }
+
+                let imageBlock = "";
+                if (step.type === "image") {
+                    const imgSrc = MEDIA_CONFIG[step.slot] || FALLBACK_MEDIA.esaPap;
+                    imageBlock = `
+                        <div class="relative mb-1.5 rounded-xl overflow-hidden bg-zinc-900 group">
+                            <img src="${imgSrc}"
+                                 onerror="handleImgError(this, '${step.slot || "esaPap"}')"
+                                 onclick="openLightbox(this.src, 'PAP Kamar 205')"
+                                 alt="PAP Kamar 205"
+                                 class="w-full max-h-60 object-cover cursor-zoom-in transition duration-200 group-hover:brightness-95">
+                            <span class="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full pointer-events-none">
+                                Ketuk untuk zoom
+                            </span>
+                        </div>
+                    `;
+                }
+
+                const doubleCheck = isOut ? `
+                    <svg class="w-3.5 h-3.5 text-ios-waCheck inline-block ml-0.5 -mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/>
+                    </svg>
+                ` : "";
+
+                const messageText = step.type === "image" ? step.caption : step.text;
+
+                row.innerHTML = `
+                    <div class="max-w-[80%] px-3 py-1.5 rounded-2xl text-[14.5px] leading-[1.38] ${
+                        isOut ? "bubble-out rounded-br-xs mr-1" : "bubble-in rounded-bl-xs ml-1"
+                    }">
+                        ${quoteBlock}
+                        ${imageBlock}
+                        <span class="break-words">${messageText}</span>
+                        <span class="float-right ml-2.5 mt-1.5 text-[10.5px] text-ios-waMuted flex items-center select-none">
+                            ${step.time}
+                            ${doubleCheck}
+                        </span>
+                    </div>
+                `;
+
+                chatBody.appendChild(row);
+            }
+
+            scrollToLatest(true);
+        }
+
+        // =========================================================================
+        // 5. TWITTER / X PRIVATE ACCOUNT OVERLAY CONTROLS
+        // =========================================================================
+        function openTweetOverlay(step) {
+            tweetLiked = false;
+            document.getElementById("tw-like-icon").setAttribute("fill", "none");
+            document.getElementById("tw-like-icon").classList.remove("text-ios-twPink");
+            document.getElementById("tw-like-count").textContent = "";
+
+            document.getElementById("tw-main-text").textContent = step.mainText;
+            document.getElementById("tw-timestamp").textContent = step.timestamp;
+            document.getElementById("tw-close-label").textContent = step.closeButtonText || "Kembali ke Chat WhatsApp";
+
+            const mediaBox = document.getElementById("tw-media-box");
+            const mediaImg = document.getElementById("tw-media-img");
+            if (step.mediaSlot) {
+                mediaBox.classList.remove("hidden");
+                mediaImg.src = MEDIA_CONFIG[step.mediaSlot] || MEDIA_CONFIG.kinaNight;
+            } else {
+                mediaBox.classList.add("hidden");
+            }
+
+            const quoteBox = document.getElementById("tw-quote-box");
+            if (step.quoteTweet) {
+                quoteBox.classList.remove("hidden");
+                document.getElementById("tw-quote-age").textContent = step.quoteTweet.age;
+                document.getElementById("tw-quote-text").textContent = step.quoteTweet.text;
+            } else {
+                quoteBox.classList.add("hidden");
+            }
+
+            const replySection = document.getElementById("tw-reply-section");
+            if (step.reply) {
+                replySection.classList.remove("hidden");
+                document.getElementById("tw-reply-age").textContent = step.reply.age;
+                document.getElementById("tw-reply-text").textContent = step.reply.text;
+            } else {
+                replySection.classList.add("hidden");
+            }
+
+            playPopSound("in");
+            tweetOverlay.classList.add("overlay-open");
+        }
+
+        function closeTweetOverlay() {
+            tweetOverlay.classList.remove("overlay-open");
+            setTimeout(() => {
+                nextStep();
+            }, 260);
+        }
+
+        function toggleTweetLike() {
+            tweetLiked = !tweetLiked;
+            const icon = document.getElementById("tw-like-icon");
+            const count = document.getElementById("tw-like-count");
+            if (tweetLiked) {
+                icon.setAttribute("fill", "currentColor");
+                icon.classList.add("text-ios-twPink");
+                count.textContent = "1";
+                count.classList.add("text-ios-twPink");
+                playPopSound("out");
+            } else {
+                icon.setAttribute("fill", "none");
+                icon.classList.remove("text-ios-twPink");
+                count.textContent = "";
+                count.classList.remove("text-ios-twPink");
+            }
+        }
+
+        // =========================================================================
+        // 6. FULL-SCREEN LIGHTBOX VIEWER
+        // =========================================================================
+        function openLightbox(src, caption) {
+            document.getElementById("lightbox-img").src = src;
+            document.getElementById("lightbox-caption").textContent = caption || "Lampiran Foto";
+            document.getElementById("lightbox-modal").style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightbox-modal").style.display = "none";
+        }
+
+        // =========================================================================
+        // 7. AUTO-PLAY, SUARA, SCROLL & RESET
+        // =========================================================================
+        function toggleAutoPlay() {
+            if (isAutoPlay) {
+                pauseAutoPlay();
+            } else {
+                isAutoPlay = true;
+                document.getElementById("auto-dot").classList.replace("bg-gray-400", "bg-emerald-400");
+                document.getElementById("auto-label").textContent = "On";
+                tapHintText.textContent = "Mode Auto aktif...";
+                nextStep();
+            }
+        }
+
+        function pauseAutoPlay() {
+            isAutoPlay = false;
+            clearTimeout(autoTimer);
+            document.getElementById("auto-dot").classList.replace("bg-emerald-400", "bg-gray-400");
+            document.getElementById("auto-label").textContent = "Auto";
+            if (stepIndex < PART1_SCRIPT.length) {
+                tapHintText.textContent = "Ketuk layar atau bar ini untuk lanjut...";
+            }
+        }
+
+        function scheduleAutoPlay() {
+            if (!isAutoPlay) return;
+            clearTimeout(autoTimer);
+            autoTimer = setTimeout(() => {
+                if (isAutoPlay) nextStep();
+            }, 1300);
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById("icon-sound-on").classList.toggle("hidden", !soundEnabled);
+            document.getElementById("icon-sound-off").classList.toggle("hidden", soundEnabled);
+            if (soundEnabled) playPopSound("out");
+        }
+
+        function resetStory() {
+            pauseAutoPlay();
+            isBusy = false;
+            contactSaved = false;
+            stepIndex = 0;
+
+            waContactName.textContent = "+62 813-7741-9028";
+            waContactSub.textContent = "~esa • online";
+            waContactSub.classList.remove("text-emerald-600", "font-medium");
+
+            chatBody.innerHTML = "";
+            typingIndicator.classList.add("hidden");
+            tweetOverlay.classList.remove("overlay-open");
+            scrollBottomBtn.classList.remove("btn-visible");
+            scrollBottomBtn.classList.add("btn-hidden");
+            tapHintText.textContent = "Ketuk layar atau bar ini untuk lanjut...";
+
+            renderStepImmediate();
+            renderStepImmediate();
+            renderStepImmediate();
+            showToast("Part 1 diulang dari awal");
+        }
+
+        let toastTimer = null;
+        function showToast(msg) {
+            const toast = document.getElementById("wa-toast");
+            toast.textContent = msg;
+            toast.classList.remove("hidden");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 2300);
+        }
+
+        function scrollToLatest(smooth = true) {
+            requestAnimationFrame(() => {
+                chatBody.scrollTo({
+                    top: chatBody.scrollHeight,
+                    behavior: smooth ? "smooth" : "auto"
+                });
+                scrollBottomBtn.classList.remove("btn-visible");
+                scrollBottomBtn.classList.add("btn-hidden");
+                unreadScrollDot.classList.add("hidden");
+            });
+        }
+
+        window.addEventListener("DOMContentLoaded", initStory);
+    </script>
+</body>
+</html>
